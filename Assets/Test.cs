@@ -7,6 +7,21 @@ public class Test : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        int []array = new int[5];
+        array[0] = 10;
+        array[1] = 20;
+        array[2] = 30;
+        array[3] = 40;
+        array[4] = 50;
+
+        for (int i = 0; i < array.Length; i++)
+            Debug.Log("配列の中身:" + array[i]);
+
+
+        for (int i = 0; i < array.Length; i++)
+            Debug.Log("配列の中身(逆順):" + array[array.Length-1-i]);
+
+
         /*
         int num = 10;
 
@@ -15,25 +30,14 @@ public class Test : MonoBehaviour {
         var = (num == 0) ? 100 : num;
         Debug.Log(var);
         */
-
-        /*
-        int[] points = new int[5];
-
-        points[0] = 10;
-        points[1] = 20;
-        points[2] = 30;
-        points[3] = 40;
-        points[4] = 50;
-
-        for (int i = 0; i < points.Length; i++)
-            Debug.Log(points[i]);
-        */
-
+        
         Boss boss = new  Boss();
 
         boss.Attack();
         boss.Defence(10);
 
+        for (int i = 0; i < 15; i++)
+            boss.Magic();
     }
 	
 	// Update is called once per frame
@@ -46,6 +50,7 @@ public class Boss
 {
     private int hp = 100;
     private int power = 20;
+    private int mp = 53;
 
     public  void Attack()
     {
@@ -56,6 +61,19 @@ public class Boss
     {
         Debug.Log(damage + "のダメージを受けた");
         this.hp -= damage;
+    }
+
+    public void Magic()
+    {
+        int mpcost = 5;
+
+        if( this.mp >= mpcost )
+        {
+            this.mp -= mpcost;
+            Debug.Log("魔法攻撃をした。残りMPは" + this.mp);
+        }
+        else
+            Debug.Log("MPが足りないため魔法が使えない。");
     }
 
 }
